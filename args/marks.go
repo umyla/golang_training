@@ -12,7 +12,7 @@ func main() {
 	fmt.Println("main func ending")
 }
 func marks() {
-	details := os.Args[1:] // from the first index till the end of the slice
+	details := os.Args[1:]
 	fmt.Println(details, "len = ", len(details))
 	if len(details) < 4 {
 		log.Println("please provide your name, age, total marks and grade")
