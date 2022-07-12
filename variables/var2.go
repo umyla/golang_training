@@ -10,4 +10,5 @@ func main() {
 		salary          = 9999.9999
 	)
 	fmt.Println(employee, id, company, salary)
+	fmt.Println("test")
 }

@@ -1,0 +1,10 @@
+package sum
+
+import "fmt"
+x := 5
+	y := 6
+func Add() {
+	
+	fmt.Println("sum=", x+y)
+
+}
