@@ -37,9 +37,8 @@ func marks() {
 	if err != nil {
 		log.Println("please provide your marks", err)
 		return
-	} else if err == nil {
-		fmt.Println("Congratulations!")
 	}
+	fmt.Println("Congratulations!")
 
 	fmt.Println("Name=", name)
 	fmt.Println("Age=", age)

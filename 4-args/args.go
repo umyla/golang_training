@@ -7,7 +7,7 @@ import (
 
 func main() {
 	fmt.Println(os.Args)
-	list := os.Args[1:]
+	list := os.Args[1:6]
 	fmt.Println(list[4])
 	fmt.Println(list[3])
 	fmt.Println(list[1])

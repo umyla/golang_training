@@ -1,3 +1,3 @@
-module go.mod
+module learn-go
 
 go 1.18

@@ -1,10 +1,11 @@
-package sum
+package temp
 
 import "fmt"
-x := 5
-	y := 6
+
 func Add() {
-	
+	x := 5
+	y := 6
+
 	fmt.Println("sum=", x+y)
 
 }
