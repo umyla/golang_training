@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	show(10, "20", 1, 2, 3, 4, 5)
-	show(200, "hello")
+	show(15, "hello")
 	fmt.Println()
 }
 func show(a int, b string, v ...int) {
