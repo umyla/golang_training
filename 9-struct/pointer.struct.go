@@ -12,10 +12,10 @@ func main() {
 		name: "ajay",
 		age:  10,
 	}
-	b := &a //var b *group = &a address of a
-	fmt.Println(a, b)
-	a.name = "some"
-	b.age = 26 // we don't need * operator to access the field
+	b := &a //var a *group = &a address of a
+
+	a.name = "xyz"
+	b.age = "some" // we don't need * operator to access the field
 	fmt.Println(b)
 	fmt.Println(a)
 
