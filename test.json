@@ -1,0 +1,20 @@
+[
+	{
+		"first_name": "abhi",
+		"perms": {
+			"admin": true
+		}
+	},
+	{
+		"first_name": "jay",
+		"perms": {
+			"read": true
+		}
+	},
+	{
+		"first_name": "jack",
+		"perms": {
+			"write": false
+		}
+	}
+]
