@@ -50,8 +50,10 @@ func main() {
 		},
 		location: "Ind",
 	}
-	fmt.Println(s1)
-	fmt.Println(t1)
-	realestate(s1)
-	realestate(t1)
+	//fmt.Println(s1)
+	//fmt.Println(t1)
+	cost := realestate(s1)
+	fmt.Println(cost)
+	rooms := realestate(t1)
+	fmt.Println(rooms)
 }
