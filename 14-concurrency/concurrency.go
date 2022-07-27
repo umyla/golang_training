@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
 func main() {
@@ -11,9 +12,11 @@ func main() {
 	defer fmt.Println("hey")
 	fmt.Println("hello from main")
 	hello()
+
 }
 func hello() {
 	//time.Sleep(2 * time.Second)
 	fmt.Println("hello from func")
 
 }
+func Runner(wg *sync.WaitGroup)
