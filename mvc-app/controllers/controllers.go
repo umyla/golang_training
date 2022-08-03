@@ -3,10 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"learn/model"
 	"net/http"
 	"strconv"
-
-	"github.com/username/reponame/model"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {

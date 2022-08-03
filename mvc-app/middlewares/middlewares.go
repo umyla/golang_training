@@ -1,4 +1,4 @@
-package middleWares
+package middlewares
 
 import (
 	"log"

@@ -1,12 +1,13 @@
 package main
 
 import (
-	"learn-go/mvc-app/controllers"
+	"learn/controllers"
+	"learn/middlewares"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/home", middleWares.LoginMid(middleWares.ErrMid(controllers.Home)))
+	http.HandleFunc("/home", middlewares.LoginMid(middlewares.ErrMid(controllers.Home)))
 	http.HandleFunc("/users", controllers.GetUser)
 
 	panic(http.ListenAndServe(":8082", nil))
