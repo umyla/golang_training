@@ -8,7 +8,7 @@ import (
 func main() {
 	http.HandleFunc("/home", homePage)
 	http.HandleFunc("/search", searchSomething)
-	http.ListenAndServe("localhost:8080", nil)
+	http.ListenAndServe("localhost:8081", nil)
 	//fmt.Println("end of the main")
 }
 func searchSomething(w http.ResponseWriter, r *http.Request) {

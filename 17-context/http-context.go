@@ -9,7 +9,12 @@ import (
 
 func main() {
 	http.HandleFunc("/", randomData)
-	http.ListenAndServe("localhost:8080", nil)
+	err := http.ListenAndServe("localhost:8080", nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
 }
 func randomData(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -17,7 +22,7 @@ func randomData(w http.ResponseWriter, r *http.Request) {
 	defer log.Println("session ended")
 	select {
 	case <-time.After(1 * time.Millisecond):
-		fmt.Println(w, "random data")
+		fmt.Fprintln(w, "random data")
 
 	case <-ctx.Done():
 		err := ctx.Err()
