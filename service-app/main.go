@@ -7,8 +7,11 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"service/auth"
 	"service/handlers"
 	"time"
+
+	"github.com/golang-jwt/jwt/v4"
 )
 
 func main() {
@@ -19,13 +22,27 @@ func main() {
 		panic(err)
 
 	}
+
 }
 func startApp(log *log.Logger) error {
+	log.Println("main:started:intializing authencation support")
+	privatePEM, err := os.ReadFile("private.pem")
+	if err != nil {
+		return fmt.Errorf("reading auth private key %w", err)
+	}
+	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(privatePEM)
+	if err != nil {
+		return fmt.Errorf("parsing auth private Key %w", err)
+	}
+	a, err := auth.NewAuth(privateKey)
+	if err != nil {
+		return fmt.Errorf("constructing auth %w", err)
+	}
 	api := http.Server{
 		Addr:         ":8080",
 		ReadTimeout:  8000 * time.Second,
 		WriteTimeout: 800 * time.Second,
-		Handler:      handlers.API(log),
+		Handler:      handlers.API(log, a),
 	}
 	shutdowm := make(chan os.Signal, 1)
 	signal.Notify(shutdowm, os.Interrupt)

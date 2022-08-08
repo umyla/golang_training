@@ -5,12 +5,14 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"service/auth"
 	"service/web"
 	"time"
 )
 
 type Mid struct {
 	Log *log.Logger
+	A   *auth.Auth
 }
 
 func (m *Mid) Logger(next web.HandlerFunc) web.HandlerFunc {
