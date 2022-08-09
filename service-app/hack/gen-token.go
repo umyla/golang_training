@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -33,10 +34,11 @@ func main() {
 	}
 	tkn := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 
-	str, err := tkn.signedstring(PrivateKey)
+	str, err := tkn.SignedString(PrivateKey)
 
 	if err != nil {
 
 		log.Fatalln(err)
 	}
+	fmt.Println(str)
 }

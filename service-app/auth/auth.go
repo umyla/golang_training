@@ -18,20 +18,20 @@ type Claims struct {
 }
 
 type Auth struct {
-	privateKey *PrivateKey
+	privateKey *rsa.PrivateKey
 }
 
 func NewAuth(privateKey *rsa.PrivateKey) (*Auth, error) {
 	if privateKey == nil {
-		return nil, error.New("privatekey cannot be nil")
+		return nil, errors.New("privatekey cannot be nil")
 	}
-	a := Auth{PrivateKey: PrivateKey}
+	a := Auth{privateKey: privateKey}
 	return &a, nil
 
 }
 func (a *Auth) GenerateToken(claims Claims) (string, error) {
 	tkn := jwt.NewWithClaims(jwt.SigningMethodRS256, &claims)
-	tokenStr, err := tkn.Signedstring(a.privateKey)
+	tokenStr, err := tkn.SignedString(a.privateKey)
 	if err != nil {
 		return " ", fmt.Errorf("signes token %w", err)
 	}

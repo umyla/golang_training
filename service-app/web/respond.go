@@ -13,7 +13,7 @@ func Respond(ctx context.Context, w http.ResponseWriter, data interface{}, statu
 		return errors.New("value not found in the context")
 	}
 	v.StatusCode = statusCode
-	w.Header().Set("Content Type", "Application/json")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 	err := json.NewEncoder(w).Encode(data)
 	if err != nil {
