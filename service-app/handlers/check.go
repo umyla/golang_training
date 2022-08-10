@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
+	"service/web"
 )
 
 func check(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
@@ -12,6 +12,7 @@ func check(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	}{
 		Status: "ok",
 	}
-	w.Header().Set("Content Type", "Application/json")
-	return json.NewEncoder(w).Encode(status)
+	//w.Header().Set("Content Type", "application/json")
+	//return json.NewEncoder(w).Encode(status)
+	return web.Respond(ctx, w, status, http.StatusOK)
 }

@@ -17,6 +17,25 @@ type Claims struct {
 	Roles []string `json:"roles"`
 }
 
+const (
+	RoleAdmin = "ADMIN"
+	RoleUser  = "USER"
+)
+
+func (c Claims) HasRoles(roles ...string) bool {
+
+	for _, has := range c.Roles { // roles with the user
+		for _, want := range roles { // what roles  handler demand
+			if has == want {
+				return true
+			}
+		}
+	}
+
+	return false
+
+}
+
 type Auth struct {
 	privateKey *rsa.PrivateKey
 }

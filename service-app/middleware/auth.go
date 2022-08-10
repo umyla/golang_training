@@ -27,3 +27,20 @@ func (m *Mid) Authenticate(next web.HandlerFunc) web.HandlerFunc {
 
 	}
 }
+func (m *Mid) HasRole(next web.HandlerFunc, roles ...string) web.HandlerFunc {
+	return func(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+		claims, ok := ctx.Value(auth.Key).(auth.Claims)
+		if !ok {
+			return errors.New("claims missing from context: HasRole called without/before Authenticate")
+		}
+
+		ok = claims.HasRoles(roles...)
+		if !ok {
+			return web.NewRequestError(errors.New("you are not authorized for that action"), http.StatusForbidden)
+		}
+
+		return next(ctx, w, r)
+
+	}
+
+}

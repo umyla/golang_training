@@ -8,6 +8,8 @@ import (
 	"os"
 	"os/signal"
 	"service/auth"
+	"service/data/user"
+	"service/database"
 	"service/handlers"
 	"time"
 
@@ -25,7 +27,17 @@ func main() {
 
 }
 func startApp(log *log.Logger) error {
+	// =========================================================================
+	//Start Database
+	db, err := database.Open()
+	if err != nil {
+		return fmt.Errorf("connecting to db %w", err)
+	}
+
+	uDB := user.DbService{DB: db}
+
 	log.Println("main:started:intializing authencation support")
+
 	privatePEM, err := os.ReadFile("private.pem")
 	if err != nil {
 		return fmt.Errorf("reading auth private key %w", err)
@@ -42,7 +54,7 @@ func startApp(log *log.Logger) error {
 		Addr:         ":8080",
 		ReadTimeout:  8000 * time.Second,
 		WriteTimeout: 800 * time.Second,
-		Handler:      handlers.API(log, a),
+		Handler:      handlers.API(log, a, &uDB),
 	}
 	shutdowm := make(chan os.Signal, 1)
 	signal.Notify(shutdowm, os.Interrupt)

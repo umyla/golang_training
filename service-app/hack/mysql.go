@@ -8,9 +8,11 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var db *sql.DB
+
 func main() {
 	var err error
-	psqlInfo := "root:root@tcp(127.0.0.1:3306)/users"
+	psqlInfo := "root:Appledad1212#@tcp(127.0.0.1:3306)/users"
 	db, err := sql.Open("mysql", psqlInfo)
 	if err != nil {
 		panic(err)
@@ -99,7 +101,7 @@ func querySingleRecord() {
 	}
 }
 func queryMultipleRecords() {
-	rows, err := db.Exec("Select id,first_name from users LIMIT 3")
+	rows, err := db.Query("Select id,first_name from users LIMIT 3")
 	if err != nil {
 		log.Fatal(err)
 	}
