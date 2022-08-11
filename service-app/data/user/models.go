@@ -22,3 +22,15 @@ type NewUser struct {
 	Roles    []string `json:"roles"`
 	Password string   `json:"password"`
 }
+type ShirtInventory struct {
+	ID          string    `json:"id"`
+	UserId      string    `json:"user_id"`
+	ItemName    string    `json:"item_name"`
+	Quantity    int       `json:"quantity"`
+	DateCreated time.Time `json:"date_created"`
+	DateUpdated time.Time `json:"date_updated"`
+}
+type NewShirtInventory struct {
+	ItemName string `json:"item_name"`
+	Quantity int    `json:"quantity"`
+}

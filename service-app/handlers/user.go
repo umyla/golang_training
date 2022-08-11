@@ -73,7 +73,25 @@ func (h *userHandlers) Login(ctx context.Context, w http.ResponseWriter, r *http
 	if err != nil {
 		return fmt.Errorf("generating token %w", err)
 	}
+	//h.SetCookie(w, tkn.Token)
+	cookie := http.Cookie{
+		Name:     "token",
+		Value:    tkn.Token,
+		HttpOnly: true,
+	}
+	http.SetCookie(w, &cookie)
+	log.Println("cookie succecfully set")
 
 	return web.Respond(ctx, w, tkn, http.StatusOK)
+
+}
+func (h *userHandlers) SetCookie(w http.ResponseWriter, token string) {
+
+	cookie := http.Cookie{
+		Name:     "token",
+		Value:    token,
+		HttpOnly: true,
+	}
+	http.SetCookie(w, &cookie)
 
 }
