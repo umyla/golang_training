@@ -16,9 +16,9 @@ func (db *DbService) CreateInventory(ctx context.Context, ni NewShirtInventory, 
 		DateUpdated: now,
 	}
 	const q = `INSERT INTO inventory
-(userId,item_name,quantity,date_created,date_updated)
-VALUES($1 $2 $3 $4 $5)
-Returning id`
+	(user_id, item_name, quantity, date_created, date_updated)
+	VALUES ( $1, $2, $3, $4, $5)
+	Returning id`
 
 	var id int
 	row := db.QueryRowContext(ctx, q, userId, inv.ItemName, inv.Quantity, inv.DateCreated, inv.DateUpdated)
@@ -32,7 +32,7 @@ Returning id`
 }
 func (db *DbService) ViewAll(ctx context.Context, userId string) ([]ShirtInventory, error) {
 	var inv []ShirtInventory
-	rows, err := db.QueryContext(ctx, "Select Id,user_id,item_name,quantity,date_creared,date_updated FROM inventory where user_id =$1", userId)
+	rows, err := db.QueryContext(ctx, "Select Id,user_id,item_name,quantity,date_created,date_updated FROM inventory where user_id =$1", userId)
 	if err != nil {
 		return nil, err
 	}

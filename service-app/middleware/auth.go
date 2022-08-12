@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"errors"
+	"log"
 	"net/http"
 	"service/auth"
 	"service/web"
@@ -20,6 +21,7 @@ func (m *Mid) Authenticate(next web.HandlerFunc) web.HandlerFunc {
 		}
 		claims, err := m.A.ValidateToken(parts[1])
 		if err != nil {
+			log.Println(err)
 			return web.NewRequestError(err, http.StatusUnauthorized)
 		}
 		ctx = context.WithValue(ctx, auth.Key, claims)
